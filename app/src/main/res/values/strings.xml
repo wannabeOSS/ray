@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Android Island</string>
+    <string name="listener_name">Android Island media access</string>
+    <string name="overlay_channel">Island session</string>
+    <string name="overlay_running">Island is active</string>
+    <string name="overlay_description">Tap to open commands. Stop to remove the island.</string>
+    <string name="stop">Stop</string>
+    <string name="open_commands">Open commands</string>
+    <string name="stop_island">Stop island</string>
+</resources>

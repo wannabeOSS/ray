@@ -1,0 +1,19 @@
+name: Planning documentation
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Pin to a verified commit SHA when activating the hosted repository.
+      - uses: actions/checkout@v4
+      - name: Validate planning documents
+        run: python3 scripts/check_docs.py

@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-10-17",
+  "package": "rea-agents@6.5.0",
+  "mode": "read-only setup preview",
+  "status": "planned",
+  "selected_clients": [
+    "codex"
+  ],
+  "plannedActions": [
+    {
+      "id": "configure_client:codex",
+      "kind": "configure_client",
+      "label": "Codex",
+      "target": "/Users/abhijit/.codex/config.toml",
+      "detail": "Add the REA MCP registration for Codex; preserve unrelated configuration. The backup path reflects the configuration inspected for this plan; if that file changes before execution, setup will select a recovery path for its current contents. Command: \"npx\" \"-y\" \"rea-agents@6.5.0\" \"mcp\". No additional provider environment variables. Existing server environment overrides are retained.",
+      "external": false,
+      "operation": "update",
+      "backupPath": "/Users/abhijit/.codex/config.toml.rea.backup"
+    },
+    {
+      "id": "install_skill",
+      "kind": "install_skill",
+      "label": "REA reverse-engineering skill",
+      "target": "/Users/abhijit/.agents/skills/reverse-engineer-anything",
+      "detail": "Install or update the bundled REA reverse-engineering skill and on-demand references.",
+      "external": false,
+      "operation": "install"
+    }
+  ],
+  "appliedActions": [],
+  "baseline": {
+    "codex_registration": "missing",
+    "workflow_skill": "missing",
+    "availableProviders": []
+  },
+  "note": "Sanitized subset. Other detected clients and their paths are intentionally omitted. No setup applied."
+}

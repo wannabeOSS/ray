@@ -1,0 +1,35 @@
+# OS and editor state
+.DS_Store
+.idea/
+*.iml
+.vscode/
+
+# Local tool caches and sensitive research
+.local/
+.firecrawl/
+.rea/
+Evidence/
+captures/
+node_modules/
+.npm/
+__pycache__/
+*.pyc
+*.log
+*.har
+*.pcap
+*.pcapng
+
+# Future Android build and secrets
+.gradle/
+**/build/
+local.properties
+*.apk
+*.aab
+*.jks
+*.keystore
+.env
+.env.*
+!.env.example
+
+# Kotlin tooling cache
+.kotlin/

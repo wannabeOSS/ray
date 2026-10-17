@@ -1,0 +1,625 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-17",
+  "phase": "implementation-kickoff",
+  "tasks": [
+    {
+      "id": "PLAN-000",
+      "title": "Establish planning foundation",
+      "owner": "Delivery",
+      "milestone": "P0",
+      "status": "done",
+      "depends_on": [],
+      "requirements": [],
+      "adrs": [],
+      "summary": "Create the complete reviewable planning workspace without starting app implementation.",
+      "acceptance": [
+        "Architecture, requirements, role docs and decision records are cross-linked.",
+        "Documentation checks pass and limitations are recorded.",
+        "REA preview and pending approval are documented without applying setup."
+      ],
+      "documents": [
+        "README.md",
+        "AGENTS.md",
+        "docs/README.md",
+        "docs/tooling/rea-setup-plan.md"
+      ],
+      "evidence": [
+        "docs/planning/validation-report.md",
+        "docs/tooling/rea-setup-preview.json"
+      ]
+    },
+    {
+      "id": "PLAN-001",
+      "title": "Prove overlay and foreground lifecycle",
+      "owner": "Android Platform",
+      "milestone": "M0",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-000"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-08",
+        "FR-09",
+        "NFR-05",
+        "NFR-06"
+      ],
+      "adrs": [
+        "ADR-001",
+        "ADR-002"
+      ],
+      "summary": "Run a disposable, user-authorized Android spike before production scaffolding.",
+      "acceptance": [
+        "Visible-Activity start, pause, stop, denial and revocation have physical-device evidence.",
+        "Window geometry, rotation, touch bounds, lock and process death are demonstrated.",
+        "Foreground type rationale and unsupported OEM behavior are recorded."
+      ],
+      "documents": [
+        "docs/system-architecture/02-android-feasibility.md",
+        "docs/system-architecture/06-lifecycle-and-failures.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-002",
+      "title": "Prove notification and media contracts",
+      "owner": "Event Integrations",
+      "milestone": "M0",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-000"
+      ],
+      "requirements": [
+        "FR-03",
+        "FR-04",
+        "FR-05"
+      ],
+      "adrs": [
+        "ADR-002",
+        "ADR-004"
+      ],
+      "summary": "Validate public source APIs using synthetic sources.",
+      "acceptance": [
+        "Snapshot/update/removal races and source reconnect are documented.",
+        "Two media sessions and supported controls are demonstrated.",
+        "Sensitive/redacted content and profile limitations are recorded."
+      ],
+      "documents": [
+        "docs/system-architecture/05-contracts-and-data.md",
+        "docs/system-architecture/02-android-feasibility.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-003",
+      "title": "Validate interaction and accessibility",
+      "owner": "UX",
+      "milestone": "M0",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-000"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-07",
+        "FR-09",
+        "FR-10"
+      ],
+      "adrs": [
+        "ADR-001",
+        "ADR-002"
+      ],
+      "summary": "Review all experience states and prove accessible overlay interaction.",
+      "acceptance": [
+        "Compact/expanded, denied, paused and recovery flows are reviewed.",
+        "TalkBack, 200% text, reduced motion and touch targets have device evidence.",
+        "In-app detail fallback is defined if overlay focus cannot meet criteria."
+      ],
+      "documents": [
+        "docs/product/experience.md",
+        "docs/system-architecture/08-quality-validation.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-004",
+      "title": "Review privacy and distribution feasibility",
+      "owner": "Security / Product",
+      "milestone": "M0",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-000"
+      ],
+      "requirements": [
+        "FR-08",
+        "NFR-01",
+        "NFR-06"
+      ],
+      "adrs": [
+        "ADR-002",
+        "ADR-003"
+      ],
+      "summary": "Confirm data boundaries and evaluate a defensible release path.",
+      "acceptance": [
+        "Permission explanation and generic preview defaults are reviewed.",
+        "Manifest, backup, logs and proposed service type have review findings.",
+        "Current distribution requirements are checked and unresolved external approval is explicit."
+      ],
+      "documents": [
+        "docs/system-architecture/07-security-and-privacy.md",
+        "docs/system-architecture/09-delivery-and-operations.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-005",
+      "title": "Harden modular foundations and production event engine",
+      "owner": "Architecture / Domain",
+      "milestone": "M1",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-001",
+        "PLAN-002",
+        "PLAN-003",
+        "PLAN-004"
+      ],
+      "requirements": [
+        "NFR-05",
+        "NFR-07"
+      ],
+      "adrs": [
+        "ADR-001",
+        "ADR-004"
+      ],
+      "summary": "Extend the authorized development slice after physical-device feasibility; complete production actor/epoch contracts and module boundaries.",
+      "acceptance": [
+        "Gradle/JDK/SDK/library versions and dependency boundaries are pinned and validated.",
+        "Reducer ordering, expiry, invalidation and bounded queues pass adversarial tests.",
+        "Synthetic fixtures reproduce competing events with a virtual clock."
+      ],
+      "documents": [
+        "docs/system-architecture/03-components-and-modules.md",
+        "docs/system-architecture/04-event-state-machine.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-006",
+      "title": "Integrate notification, media and charging sources",
+      "owner": "Event Integrations",
+      "milestone": "M2",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-005"
+      ],
+      "requirements": [
+        "FR-03",
+        "FR-04",
+        "FR-05",
+        "FR-06",
+        "NFR-07"
+      ],
+      "adrs": [
+        "ADR-003",
+        "ADR-004"
+      ],
+      "summary": "Implement bounded adapters and validated action dispatch.",
+      "acceptance": [
+        "Lifecycle and source-generation integration cases pass.",
+        "Only allowed sources and supported actions reach the engine.",
+        "Artwork and payload budgets, cancellation and double-tap guards are tested."
+      ],
+      "documents": [
+        "docs/system-architecture/05-contracts-and-data.md",
+        "docs/system-architecture/04-event-state-machine.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-007",
+      "title": "Build presentation, onboarding and lifecycle",
+      "owner": "Android Platform / UX",
+      "milestone": "M2",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-005"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "NFR-01",
+        "NFR-05",
+        "NFR-06"
+      ],
+      "adrs": [
+        "ADR-001",
+        "ADR-002",
+        "ADR-003"
+      ],
+      "summary": "Implement the reviewed UI and user-controlled host session.",
+      "acceptance": [
+        "Permission-denied and partial-access paths remain useful.",
+        "Start/stop, rotation, lock, revocation and process death leave no stale window or content.",
+        "Preference validation, migrations, backup exclusion and cleanup pass review."
+      ],
+      "documents": [
+        "docs/product/experience.md",
+        "docs/system-architecture/06-lifecycle-and-failures.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-008",
+      "title": "Validate privacy, compatibility and performance",
+      "owner": "QA",
+      "milestone": "M3",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-006",
+        "PLAN-007"
+      ],
+      "requirements": [
+        "FR-10",
+        "NFR-01",
+        "NFR-02",
+        "NFR-03",
+        "NFR-04",
+        "NFR-05",
+        "NFR-06",
+        "NFR-07"
+      ],
+      "adrs": [
+        "ADR-001",
+        "ADR-002",
+        "ADR-003",
+        "ADR-004"
+      ],
+      "summary": "Produce measured release evidence for each supported pilot device.",
+      "acceptance": [
+        "Canonical lifecycle, adversarial and accessibility scenarios pass.",
+        "Latency, frames, memory and paired battery results meet budgets or have an approved revision.",
+        "Storage, logs, network and manifest audit finds no unexpected content persistence or egress."
+      ],
+      "documents": [
+        "docs/system-architecture/08-quality-validation.md",
+        "docs/system-architecture/07-security-and-privacy.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-009",
+      "title": "Prepare pilot and release review",
+      "owner": "Product / Delivery",
+      "milestone": "M4",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-008",
+        "PLAN-013",
+        "PLAN-014",
+        "PLAN-015",
+        "PLAN-016",
+        "PLAN-017"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-09",
+        "NFR-01"
+      ],
+      "adrs": [
+        "ADR-002",
+        "ADR-003"
+      ],
+      "summary": "Prepare a reviewed distributable and honest compatibility/disclosure materials.",
+      "acceptance": [
+        "Name, namespace, license, signing and distribution choices are recorded.",
+        "Pilot feedback and requirement evidence are reviewed by the owner.",
+        "Release/distribution requirements and rollback procedure are rechecked."
+      ],
+      "documents": [
+        "docs/system-architecture/09-delivery-and-operations.md",
+        "docs/planning/open-questions.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-010",
+      "title": "Install and verify REA after approval",
+      "owner": "Delivery / Tooling",
+      "milestone": "T0",
+      "status": "blocked",
+      "depends_on": [
+        "PLAN-000"
+      ],
+      "requirements": [],
+      "adrs": [],
+      "summary": "Apply only the reviewed Codex integration, skill and scoped runtime changes.",
+      "acceptance": [
+        "Explicit approval is recorded before setup writes.",
+        "Reviewed version, backups, registration and workflow skill pass scoped diagnostics.",
+        "Fresh MCP handshake/tool listing succeeds; active-chat visibility is verified or reported pending.",
+        "Unrelated configuration is preserved and optional providers are reported separately."
+      ],
+      "documents": [
+        "docs/tooling/rea-setup-plan.md",
+        "docs/tooling/rea-verification.md"
+      ],
+      "evidence": [],
+      "blocker": "User explicitly requested setup-plan approval before installation; awaiting that approval."
+    },
+    {
+      "id": "PLAN-011",
+      "title": "Expand product plan from screenshot reference",
+      "owner": "Product / Architecture",
+      "milestone": "M1",
+      "status": "done",
+      "depends_on": [
+        "PLAN-000"
+      ],
+      "requirements": [
+        "FR-11",
+        "FR-12",
+        "FR-13",
+        "FR-14",
+        "FR-15",
+        "FR-16",
+        "FR-17",
+        "FR-18",
+        "FR-19",
+        "FR-20",
+        "FR-21",
+        "FR-22",
+        "FR-23"
+      ],
+      "adrs": [
+        "ADR-005"
+      ],
+      "summary": "Record all nine reference panels, agent meaning, torch and optional provider architecture.",
+      "acceptance": [
+        "Every visible feature has a mapped Android behavior and delivery task.",
+        "Kotlin kickoff authorization, privacy changes and release limitations are documented."
+      ],
+      "documents": [
+        "docs/product/raycast-feature-map.md",
+        "docs/system-architecture/11-command-palette.md",
+        "docs/system-architecture/12-agents-and-torch.md"
+      ],
+      "evidence": [
+        "docs/implementation/validation.md"
+      ]
+    },
+    {
+      "id": "PLAN-012",
+      "title": "Build first Kotlin vertical slice",
+      "owner": "Delivery / Platform",
+      "milestone": "M1",
+      "status": "done",
+      "depends_on": [
+        "PLAN-011"
+      ],
+      "requirements": [
+        "FR-11",
+        "FR-12",
+        "FR-13",
+        "FR-15",
+        "FR-19",
+        "FR-20",
+        "FR-21",
+        "FR-22",
+        "NFR-08"
+      ],
+      "adrs": [
+        "ADR-001",
+        "ADR-005"
+      ],
+      "summary": "Create buildable development app with local tools, platform adapters and labeled demo progress.",
+      "acceptance": [
+        "Pinned wrapper/toolchain produces a debug APK.",
+        "Meaningful JVM domain tests and Android lint pass.",
+        "Feature status honestly separates source/build evidence, simulations and pending providers."
+      ],
+      "documents": [
+        "docs/implementation/status.md",
+        "docs/implementation/development.md"
+      ],
+      "evidence": [
+        "docs/implementation/validation.md"
+      ]
+    },
+    {
+      "id": "PLAN-013",
+      "title": "Integrate real AI agent execution and progress",
+      "owner": "Integrations / Security",
+      "milestone": "M2",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-012",
+        "PLAN-004"
+      ],
+      "requirements": [
+        "FR-11",
+        "FR-17",
+        "FR-23",
+        "NFR-09"
+      ],
+      "adrs": [
+        "ADR-005"
+      ],
+      "summary": "Replace demo-only progress with an authorized runner/connector and validated cancellation.",
+      "acceptance": [
+        "Connector authentication/ownership and state revisions are verified.",
+        "Queued/running/waiting/terminal states, disconnect, cancel/retry and process death have evidence.",
+        "Tasks are never autonomously started by the island."
+      ],
+      "documents": [
+        "docs/system-architecture/12-agents-and-torch.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-014",
+      "title": "Validate and harden flashlight island",
+      "owner": "Platform / QA",
+      "milestone": "M2",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-012",
+        "PLAN-001"
+      ],
+      "requirements": [
+        "FR-12",
+        "FR-08"
+      ],
+      "adrs": [
+        "ADR-002",
+        "ADR-005"
+      ],
+      "summary": "Prove real hardware callback/control behavior and ownership-safe lifecycle.",
+      "acceptance": [
+        "Physical-device denial/revoke, camera contention and external toggles tested.",
+        "Brightness control appears only for supported API/hardware with evidence.",
+        "Lock/stop never silently toggles an externally controlled torch."
+      ],
+      "documents": [
+        "docs/system-architecture/12-agents-and-torch.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-015",
+      "title": "Integrate AI and currency providers",
+      "owner": "Integrations / Privacy",
+      "milestone": "M2",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-012",
+        "PLAN-004"
+      ],
+      "requirements": [
+        "FR-16",
+        "FR-17",
+        "FR-23",
+        "NFR-09"
+      ],
+      "adrs": [
+        "ADR-005"
+      ],
+      "summary": "Choose and wire real timestamped rates/history and explicit-send streaming AI.",
+      "acceptance": [
+        "Provider/credential/transport choices are recorded without APK server secrets.",
+        "Rates show quote timestamp/history freshness and offline states.",
+        "AI identifies actual model, supports cancel/error and never implicitly sends private content."
+      ],
+      "documents": [
+        "docs/system-architecture/11-command-palette.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-016",
+      "title": "Complete media artwork and authorized lyrics",
+      "owner": "Event Integrations",
+      "milestone": "M2",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-012",
+        "PLAN-002"
+      ],
+      "requirements": [
+        "FR-05",
+        "FR-18"
+      ],
+      "adrs": [
+        "ADR-005"
+      ],
+      "summary": "Add bounded artwork and provider-backed timed lyrics with offset.",
+      "acceptance": [
+        "Licensed/authorized source selected and unsupported state accurate.",
+        "Media actions follow advertised capabilities and correct selected session.",
+        "Lyric offset, session handoff and cache clearing are tested."
+      ],
+      "documents": [
+        "docs/product/raycast-feature-map.md",
+        "docs/system-architecture/11-command-palette.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-017",
+      "title": "Complete launcher preferences and invocation",
+      "owner": "UX / Platform",
+      "milestone": "M2",
+      "status": "proposed",
+      "depends_on": [
+        "PLAN-012",
+        "PLAN-003"
+      ],
+      "requirements": [
+        "FR-13",
+        "FR-14",
+        "FR-19",
+        "FR-20",
+        "FR-21",
+        "FR-22",
+        "NFR-08"
+      ],
+      "adrs": [
+        "ADR-005"
+      ],
+      "summary": "Finish recents, persisted layouts, priority, shortcuts, emoji catalog and action/keyboard affordances.",
+      "acceptance": [
+        "Priority/favorites/visibility/aliases/layout and app-owned recents behave and persist as specified.",
+        "Shortcut role/access spike prevents unsupported promises.",
+        "Invocation, action menus and accessibility/keyboard cases are tested; clipboard remains manual/private."
+      ],
+      "documents": [
+        "docs/product/raycast-feature-map.md",
+        "docs/system-architecture/11-command-palette.md"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "PLAN-018",
+      "title": "Document laptop and Android phone testing",
+      "owner": "Delivery / QA",
+      "milestone": "M1",
+      "status": "done",
+      "depends_on": [
+        "PLAN-012"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-05",
+        "FR-09",
+        "FR-11",
+        "FR-12",
+        "FR-13",
+        "FR-15",
+        "FR-19",
+        "FR-20"
+      ],
+      "adrs": [
+        "ADR-001",
+        "ADR-002"
+      ],
+      "summary": "Provide accurate testing instructions for the current APK without claiming unrun device checks.",
+      "acceptance": [
+        "Mac build checks, Studio emulator setup, targeted adb installation and phone-only APK installation are documented.",
+        "Feature tests specify actual UI labels, expected results, permission steps and pending integrations.",
+        "Existing artifacts/tool availability and official instructions are checked; documentation links pass."
+      ],
+      "documents": [
+        "docs/implementation/testing.md",
+        "docs/implementation/development.md"
+      ],
+      "evidence": [
+        "docs/implementation/testing.md"
+      ]
+    }
+  ]
+}
