@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-17",
+  "updated": "2026-10-20",
   "phase": "implementation-kickoff",
   "tasks": [
     {
@@ -620,6 +620,30 @@
       "evidence": [
         "docs/implementation/testing.md"
       ]
+    },
+    {
+      "id": "PLAN-019",
+      "title": "Publish source to a new public GitHub repository",
+      "owner": "Delivery / Tooling",
+      "milestone": "T0",
+      "status": "in_progress",
+      "depends_on": [
+        "PLAN-012",
+        "PLAN-018"
+      ],
+      "requirements": [],
+      "adrs": [],
+      "summary": "Create android-island under the authenticated user account and push main after public-content checks.",
+      "acceptance": [
+        "Tracked source and history contain no detected credential patterns or ignored tool/build files.",
+        "Documentation checks pass and the hosted workflow uses a verified pinned checkout action.",
+        "New repository is verified public and its main branch matches the pushed local commit."
+      ],
+      "documents": [
+        "README.md",
+        "docs/system-architecture/09-delivery-and-operations.md"
+      ],
+      "evidence": []
     }
   ]
 }
