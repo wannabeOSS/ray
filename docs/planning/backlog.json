@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "phase": "implementation-kickoff",
   "tasks": [
     {
@@ -623,7 +623,7 @@
     },
     {
       "id": "PLAN-019",
-      "title": "Publish source to a new public GitHub repository",
+      "title": "Publish source to the specified public GitHub repository",
       "owner": "Delivery / Tooling",
       "milestone": "T0",
       "status": "in_progress",
@@ -633,11 +633,11 @@
       ],
       "requirements": [],
       "adrs": [],
-      "summary": "Create android-island under the authenticated user account and push main after public-content checks.",
+      "summary": "Push main to the user-specified https://github.com/wannabeOSS/ray.git after public-content checks; use this destination instead of creating android-island.",
       "acceptance": [
         "Tracked source and history contain no detected credential patterns or ignored tool/build files.",
         "Documentation checks pass and the hosted workflow uses a verified pinned checkout action.",
-        "New repository is verified public and its main branch matches the pushed local commit."
+        "The specified repository is verified public and its main branch matches the pushed local commit."
       ],
       "documents": [
         "README.md",

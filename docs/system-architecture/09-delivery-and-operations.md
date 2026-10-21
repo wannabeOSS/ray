@@ -13,7 +13,7 @@ Status: proposed · Owner: Delivery / Tooling
 
 ## Repository and build strategy
 
-The current folder contains documentation and the initial Kotlin app, and is not yet an initialized Git repository or hosted project. Supplied issue/PR templates and workflow files become active after repository creation/push. Do not claim branch protection or CI execution until actually configured and observed.
+The current folder contains documentation and the initial Kotlin app in a local Git repository. On 2026-10-21 the user selected [wannabeOSS/ray](https://github.com/wannabeOSS/ray) as the publication destination. PLAN-019 tracks the push and remote verification. Issue/PR templates and workflow files activate when hosted; branch protection and CI results require separate observed evidence.
 
 The kickoff creates `app` and `core/domain` with pinned Gradle/AGP/Kotlin/JDK/SDK versions and a checksum-verified wrapper. Continue splitting modules according to [module boundaries](03-components-and-modules.md) as integrations grow. Maintain the version catalog and review dependency verification before release; update toolchain pins as a compatible set using official guidance. The exact kickoff baseline and observed build results live in the [development guide](../implementation/development.md).
 
