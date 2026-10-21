@@ -626,7 +626,7 @@
       "title": "Publish source to the specified public GitHub repository",
       "owner": "Delivery / Tooling",
       "milestone": "T0",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "PLAN-012",
         "PLAN-018"
@@ -643,7 +643,9 @@
         "README.md",
         "docs/system-architecture/09-delivery-and-operations.md"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/system-architecture/09-delivery-and-operations.md"
+      ]
     }
   ]
 }

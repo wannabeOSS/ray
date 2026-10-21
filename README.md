@@ -1,5 +1,7 @@
 # Android Island
 
+[Public source repository](https://github.com/wannabeOSS/ray)
+
 **An activity island and a fast command palette for Android. Built with Kotlin.**
 
 Implementation kickoff · 17 October 2026
